@@ -46,6 +46,11 @@ async function main() {
         const parsed = JSON.parse(data);
         await MovieModel.insertMany(parsed);
         break;
+        case "get-all":
+          const movies = await MovieModel.find({});
+          console.log(movies);
+          break;
+          
     // TODO: Buat logic fungsionalitas yg belum tersedia di bawah
     default:
       throw Error("command not found");
