@@ -9,6 +9,8 @@ async function main() {
   const args = process.argv.slice(2);
 
   const command = args[0];
+  const command2 = args[0];
+  console.log (command, command2);
   /**--------------- Not allowed to be edited - end - --------------------- */
 
   // Connect to MongoDB
