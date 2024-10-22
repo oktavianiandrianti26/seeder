@@ -10,7 +10,7 @@ async function main() {
 
   const command = args[0];
   const command2 = args[0];
-  console.log (command, command2);
+  console.log(command,command2);
   /**--------------- Not allowed to be edited - end - --------------------- */
 
   // Connect to MongoDB
@@ -20,25 +20,13 @@ async function main() {
   });
 
   // Define a schema for the collection
-  const schema = new mongoose.Schema(
-    {
-      title: String,
-      year: Number,
-      genre: [String],
-      description: String,
-      director: String,
-      cast: [String],
-    }, 
-    { strict: false });
+  const schema = new mongoose.Schema({}, { strict: false });
   const Model = mongoose.model(collection, schema);
 
   switch (command) {
     case "check-db-connection":
       await checkConnection();
       break;
-      case "reset-db":
-        await MovieModel.deleteMany();
-        break;
     // TODO: Buat logic fungsionalitas yg belum tersedia di bawah
     default:
       throw Error("command not found");
