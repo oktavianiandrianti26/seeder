@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const fs = require("fs");
 require("dotenv").config();
 
 async function main() {
@@ -9,8 +10,7 @@ async function main() {
   const args = process.argv.slice(2);
 
   const command = args[0];
-  const command2 = args[0];
-  console.log(command,command2);
+
   /**--------------- Not allowed to be edited - end - --------------------- */
 
   // Connect to MongoDB
@@ -29,8 +29,10 @@ async function main() {
       director: String,
       cast: [String],
     }, 
-    { strict: false });
-  const Model = mongoose.model(collection, schema);
+    { strict: false }
+  );
+
+  const MovieModel = mongoose.model(collection, schema);
 
   switch (command) {
     case "check-db-connection":
@@ -38,6 +40,11 @@ async function main() {
       break;
       case "reset-db":
         await MovieModel.deleteMany();
+        break;
+      case "bulk-insert":
+        const data = fs.readFileSync("./seed.json");
+        const parsed = JSON.parse(data);
+        await MovieModel.insertMany(parsed);
         break;
     // TODO: Buat logic fungsionalitas yg belum tersedia di bawah
     default:
